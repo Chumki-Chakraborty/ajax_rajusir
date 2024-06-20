@@ -1,0 +1,67 @@
+<%- include("./partial/header.ejs") %>
+    <title>
+        <%- title %>
+    </title>
+    <div class="container">
+        <h1>Student Registration Form</h1>
+        <form method="post" action="/update/<%= displayData.id %>">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" class="form-control" name="firstName" value="<%= displayData.firstName %>" placeholder="Enter First Name" required autocomplete="off" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" class="form-control" name="lastName" value="<%= displayData.lastName %>" placeholder="Enter Last Name" required autocomplete="off" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" class="form-control" name="address" value="<%= displayData.address %>" placeholder="Enter Full Address" required autocomplete="off" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Contact Number</label>
+                        <input type="number" class="form-control" name="contactNumber" value="<%= displayData.contact %>" placeholder="Enter Contact Number" required autocomplete="off" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Email ID</label>
+                        <input type="email" class="form-control" name="email" value="<%= displayData.email %>" placeholder="Enter Email ID" required autocomplete="off" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Select Course</label>
+                        <select class="form-control courses" name="course">
+                <option disabled>Select Course</option>
+                <option <%if(displayData.course == "Laravel") { %>  selected <%}%>value="Laravel">Laravel</option>
+                <option <%if(displayData.course == "Node JS") { %>  selected <%}%> value="Node JS">Node JS</option>
+                <option <%if(displayData.course == "Web Designing") { %>  selected <%}%> value="Web Designing">Web Designing</option>
+              </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Fees</label>
+                        <input type="text" value="<%= displayData.fees %>" class="form-control fees" name="fees" readonly required/>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-outline-success btn-lg btn-block edit-student" data-id="<%= displayData.id %>">Update</button>
+
+        </form>
+    </div>
+    <%- include("./partial/footer.ejs") %>

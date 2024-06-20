@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- head -->
+<%- include('./common/head.ejs')%>
+
+  <body>
+    <!-- navbar -->
+    <%- include('./common/navbar.ejs')%>
+
+      <div class="container mt-5" style="width: 60%;">
+        <h2 style="font-weight: bolder;">PRODUCT TABLE</h2>
+
+
+        <% if ( expressFlash.length > 0 ) { %>
+          <p>Message: <%= expressFlash %> </p>
+        <% } %>
+
+        <% if ( flashMsg.length > 0 ) { %>
+          <p>Message: <%= flashMsg %> </p>
+        <% } %>
+
+        <% if ( deleteFlash.length > 0 ) { %>
+          <p>Message: <%= deleteFlash %> </p>
+        <% } %>
+
+        <table class="table table-secondary table-striped table-bordered mt-4">
+          <thead>
+            <tr>
+              <th scope="col">Sl. No</th>
+              <th scope="col">Product Id</th>
+              <th scope="col">Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Size</th>
+              <th scope="col">Price</th>
+              <th scope="col">Colour</th>
+              <th scope="col">Images</th>
+              <th scope="col">Action1</th>
+              <th scope="col">Action2</th>
+            </tr>
+          </thead>
+          <% if(data.length>0){%>
+          <tbody>
+            <% data.forEach((product,index)=>{%>
+              <tr>
+                <th scope="row">
+                  <%= index +1 %>
+                </th>
+                <td>
+                  <%= product.last4Digits%>
+                </td>
+                <td>
+                  <%= product.name %>
+                </td>
+                <td>
+                  <%= product.description %>
+                </td>
+                <td>
+                  <%= product.size %>
+                </td>
+                <td>
+                  <%= product.price %>
+                </td>
+                <td>
+                    <%= product.colour %>
+                  </td>
+                <td>
+                  <% product.images.forEach(image => {%>
+                  <img src="<%= image %>" height="50px" width="50px" alt="product images">
+                  <% }) %>
+                </td>
+                <td><a href="/edit/<%= product._id %>" class="btn btn-success">Edit</a></td>
+                <td><a href="/delete/<%= product._id %>" class="btn btn-danger">Delete</a></td>
+              </tr>
+              <% })%>
+          </tbody>
+          <%}else{%>
+            <h1 style="font-weight:bold; ">No Data Found</h1>
+            <%}%>
+        </table>
+      </div>
+      <!-- footer -->
+      <%- include('./common/footer.ejs')%>
+  </body>
+
+</html>

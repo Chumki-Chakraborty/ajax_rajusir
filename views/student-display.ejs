@@ -1,0 +1,64 @@
+<%- include("./partial/header.ejs") %>
+    <title>
+        <%- title %>
+    </title>
+    <div class="container">
+        <h1>Show Students</h1>
+        <a href="/registration" class="btn btn-outline-primary">Add Student</a>
+        <hr>
+
+        <% if (message.length>0) {%> 
+            <div class="alert alert-success">
+              <%= message %>
+            </div>  
+            <%}%> 
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <!-- dynamic -->
+                    <th>Roll</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Contact</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Course Name</th>
+                    <th scope="col" colspan="2">Action</th>
+                </tr>
+            </thead>
+            <% let count = 0;
+        if(displayData.length > 0) {%>
+                <tbody>
+                    <% for(let std of displayData) { if(std.status!=0){%>
+                        <tr>
+                            <td>
+                                <%=std.id.toString().slice(19,24)%>
+                            </td>
+                            <td>
+                                <%= ++count %>
+                            </td>
+                            <td>
+                                <%=std.firstName+" "+std.lastName%>
+                            </td>
+                            <td>
+                                <%=std.address%>
+                            </td>
+                            <td>
+                                <%=std.contact%>
+                            </td>
+                            <td>
+                                <%=std.email%>
+                            </td>
+                            <td>
+                                <%=std.course%>
+                            </td>
+                            <td><a href="/update/<%= std.id %>" class="btn btn-outline-success">Edit</a></td>
+                            <td><a href="#" class="btn btn-outline-danger delete-student" data-id="<%= std.id %>">Delete</a></td>
+                        </tr>
+                </tbody>
+                <%} } }else {%>
+                    <h1>No data found</h1>
+                    <%}%>
+        </table>
+    </div>
+    <%- include("./partial/footer.ejs") %>
